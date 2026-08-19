@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PPDB – Pah Tsung School</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy: #0d2240;
+      --navy-light: #163360;
+      --gold: #F5C400;
+      --gold-light: #FFD740;
+      --white: #ffffff;
+      --off-white: #f8f5f0;
+      --gray: #6b7280;
+      --light-gray: #e5e7eb;
+      --red: #e53e3e;
+      --font-display: 'Playfair Display', serif;
+      --font-body: 'DM Sans', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      color: var(--navy);
+      background: var(--off-white);
+      overflow-x: hidden;
+    }
+
+    /* ── NAVBAR ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 48px;
+      height: 72px;
+      background: rgba(255,255,255,0.97);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(245,196,0,0.2);
+      box-shadow: 0 4px 24px rgba(13,34,64,0.08);
+    }
+
+    .nav-logo { text-decoration: none; display: flex; align-items: center; }
+    .nav-logo img { height: 44px; object-fit: contain; }
+
+    .nav-back {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--navy);
+      text-decoration: none;
+      transition: color 0.2s, gap 0.2s;
+    }
+    .nav-back:hover { color: var(--gold); gap: 12px; }
+    .nav-back svg { transition: transform 0.2s; }
+    .nav-back:hover svg { transform: translateX(-3px); }
+
+    /* ── HERO PPDB ── */
+    .ppdb-hero {
+      padding-top: 72px;
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .ppdb-hero-pattern {
+      position: absolute;
+      inset: 0;
+      opacity: 0.05;
+      background-image: radial-gradient(circle at 2px 2px, var(--gold) 1px, transparent 0);
+      background-size: 40px 40px;
+    }
+
+    .ppdb-hero-inner {
+      position: relative;
+      z-index: 2;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 60px 48px 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: end;
+    }
+
+    .ppdb-hero-text { padding-bottom: 60px; }
+
+    .ppdb-eyebrow {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gold);
+      border: 1px solid rgba(245,196,0,0.4);
+      padding: 6px 16px;
+      border-radius: 20px;
+      margin-bottom: 20px;
+    }
+
+    .ppdb-hero-text h1 {
+      font-family: var(--font-display);
+      font-size: clamp(32px, 4vw, 52px);
+      color: var(--white);
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -0.5px;
+      margin-bottom: 16px;
+    }
+
+    .ppdb-hero-text h1 span { color: var(--gold); }
+
+    .ppdb-hero-text p {
+      font-size: 16px;
+      color: rgba(255,255,255,0.65);
+      line-height: 1.7;
+      max-width: 420px;
+    }
+
+    .ppdb-hero-stats {
+      display: flex;
+      gap: 32px;
+      margin-top: 36px;
+      flex-wrap: wrap;
+    }
+
+    .ppdb-hero-stat {}
+    .ppdb-hero-stat-num {
+      font-family: var(--font-display);
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--gold);
+      line-height: 1;
+    }
+    .ppdb-hero-stat-label {
+      font-size: 12px;
+      color: rgba(255,255,255,0.5);
+      margin-top: 4px;
+    }
+
+    .ppdb-hero-img {
+      align-self: end;
+    }
+    .ppdb-hero-img img {
+      width: 100%;
+      max-height: 340px;
+      object-fit: cover;
+      object-position: top;
+      border-radius: 12px 12px 0 0;
+      display: block;
+    }
+
+    /* ── STEPS BAR ── */
+    .steps-bar {
+      background: var(--gold);
+      padding: 0 48px;
+    }
+
+    .steps-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: stretch;
+    }
+
+    .step-item {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 20px 0;
+      border-right: 1px solid rgba(13,34,64,0.15);
+      padding-right: 24px;
+      padding-left: 24px;
+    }
+    .step-item:first-child { padding-left: 0; }
+    .step-item:last-child { border-right: none; }
+
+    .step-num {
+      width: 36px; height: 36px;
+      background: var(--navy);
+      color: var(--gold);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+
+    .step-text {}
+    .step-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--navy);
+    }
+    .step-desc {
+      font-size: 11px;
+      color: rgba(13,34,64,0.65);
+      margin-top: 2px;
+    }
+
+    /* ── MAIN CONTENT ── */
+    .ppdb-main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 60px 48px;
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: 48px;
+      align-items: start;
+    }
+
+    /* ── FORM ── */
+    .form-card {
+      background: var(--white);
+      border-radius: 16px;
+      padding: 40px;
+      box-shadow: 0 4px 32px rgba(13,34,64,0.08);
+    }
+
+    .form-section-title {
+      font-family: var(--font-display);
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 8px;
+    }
+
+    .form-section-sub {
+      font-size: 14px;
+      color: var(--gray);
+      margin-bottom: 28px;
+      line-height: 1.6;
+    }
+
+    .gold-divider {
+      width: 48px; height: 3px;
+      background: var(--gold);
+      border-radius: 2px;
+      margin-bottom: 28px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .form-group.full { grid-column: 1 / -1; }
+
+    .form-group label {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--navy);
+      letter-spacing: 0.3px;
+    }
+
+    .form-group label span.required {
+      color: var(--red);
+      margin-left: 2px;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      padding: 11px 14px;
+      border: 1.5px solid var(--light-gray);
+      border-radius: 8px;
+      font-size: 14px;
+      font-family: var(--font-body);
+      color: var(--navy);
+      background: var(--white);
+      transition: border-color 0.2s, box-shadow 0.2s;
+      outline: none;
+      width: 100%;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 3px rgba(245,196,0,0.15);
+    }
+
+    .form-group textarea { resize: vertical; min-height: 90px; }
+
+    .form-group select { cursor: pointer; }
+
+    .form-divider {
+      grid-column: 1 / -1;
+      border: none;
+      border-top: 1px solid var(--light-gray);
+      margin: 8px 0;
+    }
+
+    .form-section-label {
+      grid-column: 1 / -1;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gold);
+      padding-top: 4px;
+    }
+
+    .checkbox-group {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      grid-column: 1 / -1;
+      margin-top: 4px;
+    }
+
+    .checkbox-group input[type="checkbox"] {
+      width: 18px; height: 18px;
+      margin-top: 2px;
+      flex-shrink: 0;
+      accent-color: var(--navy);
+      cursor: pointer;
+    }
+
+    .checkbox-group label {
+      font-size: 13px;
+      color: var(--gray);
+      line-height: 1.6;
+      cursor: pointer;
+      font-weight: 400;
+    }
+
+    .checkbox-group label a {
+      color: var(--navy);
+      font-weight: 600;
+      text-decoration: underline;
+    }
+
+    .btn-submit {
+      grid-column: 1 / -1;
+      background: var(--navy);
+      color: var(--white);
+      border: none;
+      padding: 16px 32px;
+      border-radius: 8px;
+      font-size: 15px;
+      font-weight: 700;
+      font-family: var(--font-body);
+      cursor: pointer;
+      width: 100%;
+      transition: background 0.2s, transform 0.2s;
+      letter-spacing: 0.3px;
+      margin-top: 8px;
+    }
+
+    .btn-submit:hover {
+      background: var(--gold);
+      color: var(--navy);
+      transform: translateY(-2px);
+    }
+
+    /* ── SIDEBAR ── */
+    .sidebar { display: flex; flex-direction: column; gap: 24px; }
+
+    .info-card {
+      background: var(--white);
+      border-radius: 16px;
+      padding: 28px;
+      box-shadow: 0 4px 32px rgba(13,34,64,0.07);
+    }
+
+    .info-card-title {
+      font-family: var(--font-display);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 6px;
+    }
+
+    .info-card-sub {
+      font-size: 13px;
+      color: var(--gray);
+      margin-bottom: 20px;
+      line-height: 1.5;
+    }
+
+    .info-card .gold-divider { margin-bottom: 20px; }
+
+    .info-list { list-style: none; display: flex; flex-direction: column; gap: 14px; }
+
+    .info-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 14px;
+      color: var(--navy);
+      line-height: 1.5;
+    }
+
+    .info-list li .icon {
+      width: 32px; height: 32px;
+      background: rgba(245,196,0,0.15);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      color: var(--navy);
+    }
+
+    .info-list li .info-text {}
+    .info-list li .info-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--gray);
+      display: block;
+      margin-bottom: 2px;
+    }
+
+    .jenjang-list { display: flex; flex-direction: column; gap: 10px; }
+
+    .jenjang-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 16px;
+      border-radius: 8px;
+      border: 1.5px solid var(--light-gray);
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .jenjang-item:hover {
+      border-color: var(--gold);
+      background: rgba(245,196,0,0.06);
+    }
+
+    .jenjang-dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: var(--gold);
+      flex-shrink: 0;
+    }
+
+    .jenjang-name {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--navy);
+    }
+
+    .jenjang-kelas {
+      font-size: 12px;
+      color: var(--gray);
+      margin-left: auto;
+    }
+
+    .contact-card {
+      background: var(--navy);
+      border-radius: 16px;
+      padding: 28px;
+      color: var(--white);
+    }
+
+    .contact-card h4 {
+      font-family: var(--font-display);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 6px;
+    }
+
+    .contact-card p {
+      font-size: 13px;
+      color: rgba(255,255,255,0.55);
+      margin-bottom: 20px;
+      line-height: 1.5;
+    }
+
+    .contact-card .gold-divider { background: var(--gold); }
+
+    .contact-links { display: flex; flex-direction: column; gap: 12px; }
+
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      font-size: 14px;
+      color: rgba(255,255,255,0.75);
+      transition: color 0.2s;
+    }
+
+    .contact-link:hover { color: var(--gold); }
+
+    .contact-link .contact-icon {
+      width: 36px; height: 36px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+
+    /* ── SUCCESS STATE ── */
+    .success-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(13,34,64,0.7);
+      z-index: 200;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(4px);
+    }
+
+    .success-overlay.show { display: flex; }
+
+    .success-box {
+      background: var(--white);
+      border-radius: 20px;
+      padding: 48px 40px;
+      text-align: center;
+      max-width: 440px;
+      width: 90%;
+      animation: popIn 0.4s ease;
+    }
+
+    @keyframes popIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to   { opacity: 1; transform: scale(1); }
+    }
+
+    .success-icon {
+      width: 72px; height: 72px;
+      background: rgba(245,196,0,0.15);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 20px;
+      font-size: 36px;
+    }
+
+    .success-box h3 {
+      font-family: var(--font-display);
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 10px;
+    }
+
+    .success-box p {
+      font-size: 15px;
+      color: var(--gray);
+      line-height: 1.6;
+      margin-bottom: 28px;
+    }
+
+    .success-box button {
+      background: var(--navy);
+      color: var(--white);
+      border: none;
+      padding: 12px 32px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      font-family: var(--font-body);
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .success-box button:hover { background: var(--gold); color: var(--navy); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #08192e;
+      padding: 28px 48px;
+      text-align: center;
+    }
+
+    .footer-bottom {
+      font-size: 13px;
+      color: rgba(255,255,255,0.3);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      nav { padding: 0 24px; }
+      .ppdb-hero-inner { grid-template-columns: 1fr; gap: 32px; }
+      .ppdb-hero-img { display: none; }
+      .ppdb-hero-inner { padding: 40px 24px 0; }
+      .ppdb-hero-text { padding-bottom: 40px; }
+      .steps-bar { padding: 0 24px; overflow-x: auto; }
+      .steps-inner { min-width: 600px; }
+      .ppdb-main { grid-template-columns: 1fr; padding: 40px 24px; }
+      .form-grid { grid-template-columns: 1fr; }
+      .form-group.full { grid-column: 1; }
+      .btn-submit { grid-column: 1; }
+      .form-section-label { grid-column: 1; }
+      .form-divider { grid-column: 1; }
+      .checkbox-group { grid-column: 1; }
+      footer { padding: 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav>
+    <a href="index.html" class="nav-logo">
+      <img src="https://i.ibb.co.com/1fMy5VXb/logo-Pah-Tsung-text-biru-utk-video.png" alt="Logo Pah Tsung"/>
+    </a>
+    <a href="index.html" class="nav-back">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+        <path d="M19 12H5M12 5l-7 7 7 7"/>
+      </svg>
+      Kembali ke Beranda
+    </a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="ppdb-hero">
+    <div class="ppdb-hero-pattern"></div>
+    <div class="ppdb-hero-inner">
+      <div class="ppdb-hero-text">
+        <span class="ppdb-eyebrow">PPDB 2025 / 2026</span>
+        <h1>Daftarkan Putra-Putri Anda di <span>Pah Tsung School</span></h1>
+        <p>Berikan mereka fondasi terbaik — fasih tiga bahasa, berkarakter, dan siap bersaing di era global. Pendaftaran dibuka sekarang!</p>
+        <div class="ppdb-hero-stats">
+          <div class="ppdb-hero-stat">
+            <div class="ppdb-hero-stat-num">3</div>
+            <div class="ppdb-hero-stat-label">Bahasa Pengantar</div>
+          </div>
+          <div class="ppdb-hero-stat">
+            <div class="ppdb-hero-stat-num">A</div>
+            <div class="ppdb-hero-stat-label">Akreditasi BAN-S/M</div>
+          </div>
+          <div class="ppdb-hero-stat">
+            <div class="ppdb-hero-stat-num">4</div>
+            <div class="ppdb-hero-stat-label">Jenjang Pendidikan</div>
+          </div>
+        </div>
+      </div>
+      <div class="ppdb-hero-img">
+        <img src="https://i.ibb.co.com/m5D3vXY5/foto-aset-web-siswa-pah-tsung.png" alt="Siswa Pah Tsung"/>
+      </div>
+    </div>
+  </section>
+
+  <!-- STEPS BAR -->
+  <div class="steps-bar">
+    <div class="steps-inner">
+      <div class="step-item">
+        <div class="step-num">1</div>
+        <div class="step-text">
+          <div class="step-title">Isi Formulir</div>
+          <div class="step-desc">Data calon siswa & orang tua</div>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">2</div>
+        <div class="step-text">
+          <div class="step-title">Verifikasi</div>
+          <div class="step-desc">Tim kami menghubungi Anda</div>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">3</div>
+        <div class="step-text">
+          <div class="step-title">Tes Masuk</div>
+          <div class="step-desc">Jadwal tes & wawancara</div>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">4</div>
+        <div class="step-text">
+          <div class="step-title">Diterima</div>
+          <div class="step-desc">Selamat bergabung!</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <div class="ppdb-main">
+
+    <!-- FORM -->
+    <div class="form-card">
+      <div class="form-section-title">Formulir Pendaftaran</div>
+      <div class="form-section-sub">Lengkapi data di bawah ini dengan benar. Tim kami akan menghubungi Anda dalam 1×24 jam kerja.</div>
+      <div class="gold-divider"></div>
+
+      <div class="form-grid">
+
+        <!-- DATA CALON SISWA -->
+        <div class="form-section-label">Data Calon Siswa</div>
+
+        <div class="form-group full">
+          <label>Nama Lengkap Calon Siswa <span class="required">*</span></label>
+          <input type="text" placeholder="Sesuai akta kelahiran"/>
+        </div>
+
+        <div class="form-group">
+          <label>Tempat Lahir <span class="required">*</span></label>
+          <input type="text" placeholder="Kota kelahiran"/>
+        </div>
+
+        <div class="form-group">
+          <label>Tanggal Lahir <span class="required">*</span></label>
+          <input type="date"/>
+        </div>
+
+        <div class="form-group">
+          <label>Jenis Kelamin <span class="required">*</span></label>
+          <select>
+            <option value="" disabled selected>Pilih jenis kelamin</option>
+            <option>Laki-laki</option>
+            <option>Perempuan</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Agama <span class="required">*</span></label>
+          <select>
+            <option value="" disabled selected>Pilih agama</option>
+            <option>Islam</option>
+            <option>Kristen Protestan</option>
+            <option>Katolik</option>
+            <option>Hindu</option>
+            <option>Buddha</option>
+            <option>Konghucu</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Jenjang yang Dituju <span class="required">*</span></label>
+          <select>
+            <option value="" disabled selected>Pilih jenjang</option>
+            <option>TK (Taman Kanak-Kanak)</option>
+            <option>SD (Sekolah Dasar)</option>
+            <option>SMP (Sekolah Menengah Pertama)</option>
+            <option>SMA (Sekolah Menengah Atas)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Kelas yang Dituju <span class="required">*</span></label>
+          <select>
+            <option value="" disabled selected>Pilih kelas</option>
+            <option>TK A</option>
+            <option>TK B</option>
+            <option>Kelas 1 SD</option>
+            <option>Kelas 2 SD</option>
+            <option>Kelas 3 SD</option>
+            <option>Kelas 4 SD</option>
+            <option>Kelas 5 SD</option>
+            <option>Kelas 6 SD</option>
+            <option>Kelas 7 SMP</option>
+            <option>Kelas 8 SMP</option>
+            <option>Kelas 9 SMP</option>
+            <option>Kelas 10 SMA</option>
+            <option>Kelas 11 SMA</option>
+            <option>Kelas 12 SMA</option>
+          </select>
+        </div>
+
+        <div class="form-group full">
+          <label>Asal Sekolah Sebelumnya</label>
+          <input type="text" placeholder="Nama sekolah sebelumnya (jika ada)"/>
+        </div>
+
+        <hr class="form-divider"/>
+
+        <!-- DATA ORANG TUA -->
+        <div class="form-section-label">Data Orang Tua / Wali</div>
+
+        <div class="form-group">
+          <label>Nama Ayah / Wali <span class="required">*</span></label>
+          <input type="text" placeholder="Nama lengkap"/>
+        </div>
+
+        <div class="form-group">
+          <label>Nama Ibu <span class="required">*</span></label>
+          <input type="text" placeholder="Nama lengkap"/>
+        </div>
+
+        <div class="form-group">
+          <label>No. WhatsApp Aktif <span class="required">*</span></label>
+          <input type="tel" placeholder="08xx-xxxx-xxxx"/>
+        </div>
+
+        <div class="form-group">
+          <label>Alamat Email <span class="required">*</span></label>
+          <input type="email" placeholder="email@contoh.com"/>
+        </div>
+
+        <div class="form-group full">
+          <label>Alamat Domisili <span class="required">*</span></label>
+          <input type="text" placeholder="Alamat lengkap tempat tinggal saat ini"/>
+        </div>
+
+        <div class="form-group">
+          <label>Pekerjaan Ayah / Wali</label>
+          <input type="text" placeholder="Pekerjaan"/>
+        </div>
+
+        <div class="form-group">
+          <label>Pekerjaan Ibu</label>
+          <input type="text" placeholder="Pekerjaan"/>
+        </div>
+
+        <hr class="form-divider"/>
+
+        <!-- INFO TAMBAHAN -->
+        <div class="form-section-label">Informasi Tambahan</div>
+
+        <div class="form-group">
+          <label>Dari mana Anda mengetahui Pah Tsung?</label>
+          <select>
+            <option value="" disabled selected>Pilih sumber informasi</option>
+            <option>Instagram / Media Sosial</option>
+            <option>Rekomendasi Teman / Keluarga</option>
+            <option>Google Search</option>
+            <option>Brosur / Spanduk</option>
+            <option>Alumni Pah Tsung</option>
+            <option>Lainnya</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Tahun Ajaran yang Dituju</label>
+          <select>
+            <option>2025 / 2026</option>
+            <option>2026 / 2027</option>
+          </select>
+        </div>
+
+        <div class="form-group full">
+          <label>Pesan / Pertanyaan</label>
+          <textarea placeholder="Tulis pertanyaan atau informasi tambahan yang ingin Anda sampaikan..."></textarea>
+        </div>
+
+        <div class="checkbox-group">
+          <input type="checkbox" id="agree"/>
+          <label for="agree">Saya menyatakan bahwa data yang saya isi adalah benar dan saya menyetujui <a href="#">syarat & ketentuan</a> pendaftaran Pah Tsung School.</label>
+        </div>
+
+        <button class="btn-submit" onclick="handleSubmit()">
+          Kirim Formulir Pendaftaran →
+        </button>
+
+      </div>
+    </div>
+
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+
+      <!-- Jenjang -->
+      <div class="info-card">
+        <div class="info-card-title">Jenjang Tersedia</div>
+        <div class="info-card-sub">Pilih jenjang sesuai usia putra-putri Anda</div>
+        <div class="gold-divider"></div>
+        <div class="jenjang-list">
+          <div class="jenjang-item">
+            <div class="jenjang-dot"></div>
+            <div class="jenjang-name">Taman Kanak-Kanak</div>
+            <div class="jenjang-kelas">TK A & B</div>
+          </div>
+          <div class="jenjang-item">
+            <div class="jenjang-dot"></div>
+            <div class="jenjang-name">Sekolah Dasar</div>
+            <div class="jenjang-kelas">Kelas 1–6</div>
+          </div>
+          <div class="jenjang-item">
+            <div class="jenjang-dot"></div>
+            <div class="jenjang-name">Sekolah Menengah Pertama</div>
+            <div class="jenjang-kelas">Kelas 7–9</div>
+          </div>
+          <div class="jenjang-item">
+            <div class="jenjang-dot"></div>
+            <div class="jenjang-name">Sekolah Menengah Atas</div>
+            <div class="jenjang-kelas">Kelas 10–12</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Info Penting -->
+      <div class="info-card">
+        <div class="info-card-title">Informasi Penting</div>
+        <div class="info-card-sub">Hal yang perlu dipersiapkan</div>
+        <div class="gold-divider"></div>
+        <ul class="info-list">
+          <li>
+            <div class="icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+            </div>
+            <div class="info-text">
+              <span class="info-label">Dokumen</span>
+              Akta kelahiran, KK, ijazah/rapor terakhir, foto 3×4
+            </div>
+          </li>
+          <li>
+            <div class="icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+            </div>
+            <div class="info-text">
+              <span class="info-label">Jadwal</span>
+              Pendaftaran dibuka setiap hari kerja, Senin–Jumat
+            </div>
+          </li>
+          <li>
+            <div class="icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+            </div>
+            <div class="info-text">
+              <span class="info-label">Respons</span>
+              Tim kami akan menghubungi dalam 1×24 jam kerja
+            </div>
+          </li>
+          <li>
+            <div class="icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+            </div>
+            <div class="info-text">
+              <span class="info-label">Lokasi</span>
+              Kompleks City Park Blok A4, Cengkareng, Jakarta Barat
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Kontak -->
+      <div class="contact-card">
+        <h4>Butuh Bantuan?</h4>
+        <p>Hubungi tim admisi kami langsung</p>
+        <div class="gold-divider"></div>
+        <div class="contact-links">
+          <a href="tel:02122522237" class="contact-link">
+            <div class="contact-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.68A2 2 0 012 .99h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+            </div>
+            (021) 2252-2237
+          </a>
+          <a href="mailto:info@pahtsung.sch.id" class="contact-link">
+            <div class="contact-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </div>
+            info@pahtsung.sch.id
+          </a>
+          <a href="https://wa.me/6221225222237" target="_blank" class="contact-link">
+            <div class="contact-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            </div>
+            Chat WhatsApp
+          </a>
+          <a href="https://www.instagram.com/pahtsung.school" target="_blank" class="contact-link">
+            <div class="contact-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+            </div>
+            @pahtsung.school
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SUCCESS OVERLAY -->
+  <div class="success-overlay" id="successOverlay">
+    <div class="success-box">
+      <div class="success-icon">🎉</div>
+      <h3>Formulir Terkirim!</h3>
+      <p>Terima kasih telah mendaftarkan putra-putri Anda di Pah Tsung School. Tim admisi kami akan menghubungi Anda dalam 1×24 jam kerja.</p>
+      <button onclick="document.getElementById('successOverlay').classList.remove('show')">Tutup</button>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-bottom">© 2025 Pah Tsung School. Hak cipta dilindungi. &nbsp;·&nbsp; Kompleks City Park Blok A4, Cengkareng, Jakarta Barat</div>
+  </footer>
+
+  <script>
+    function handleSubmit() {
+      const checkbox = document.querySelector('input[type="checkbox"]');
+      if (!checkbox.checked) {
+        alert('Harap centang persetujuan syarat & ketentuan terlebih dahulu.');
+        return;
+      }
+      document.getElementById('successOverlay').classList.add('show');
+    }
+  </script>
+
+</body>
+</html>
