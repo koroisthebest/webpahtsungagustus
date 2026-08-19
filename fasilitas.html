@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Fasilitas Sekolah – Pah Tsung School</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy: #0d2240;
+      --navy-light: #163360;
+      --gold: #F5C400;
+      --gold-light: #FFD740;
+      --white: #ffffff;
+      --off-white: #f8f5f0;
+      --gray: #6b7280;
+      --light-gray: #e5e7eb;
+      --font-display: 'Playfair Display', serif;
+      --font-body: 'DM Sans', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font-body); color: var(--navy); background: var(--off-white); overflow-x: hidden; }
+
+    /* ── NAVBAR ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 48px; height: 72px;
+      background: rgba(255,255,255,0.97);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(245,196,0,0.2);
+      box-shadow: 0 4px 24px rgba(13,34,64,0.08);
+    }
+    .nav-logo { text-decoration: none; display: flex; align-items: center; }
+    .nav-logo img { height: 44px; object-fit: contain; }
+    .nav-back {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 14px; font-weight: 600; color: var(--navy);
+      text-decoration: none; transition: color 0.2s, gap 0.2s;
+    }
+    .nav-back:hover { color: var(--gold); gap: 12px; }
+    .nav-back:hover svg { transform: translateX(-3px); }
+    .nav-back svg { transition: transform 0.2s; }
+
+    /* ── HERO ── */
+    .page-hero {
+      padding-top: 72px;
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
+      position: relative; overflow: hidden;
+    }
+    .page-hero-pattern {
+      position: absolute; inset: 0; opacity: 0.05;
+      background-image: radial-gradient(circle at 2px 2px, var(--gold) 1px, transparent 0);
+      background-size: 40px 40px;
+    }
+    .page-hero-inner {
+      position: relative; z-index: 2;
+      max-width: 1100px; margin: 0 auto;
+      padding: 56px 48px 52px;
+    }
+    .page-eyebrow {
+      display: inline-block; font-size: 11px; font-weight: 600;
+      letter-spacing: 3px; text-transform: uppercase; color: var(--gold);
+      border: 1px solid rgba(245,196,0,0.4); padding: 6px 16px;
+      border-radius: 20px; margin-bottom: 18px;
+    }
+    .page-hero-inner h1 {
+      font-family: var(--font-display);
+      font-size: clamp(32px, 4vw, 54px);
+      color: var(--white); font-weight: 700;
+      line-height: 1.15; letter-spacing: -0.5px; margin-bottom: 14px;
+    }
+    .page-hero-inner h1 span { color: var(--gold); }
+    .page-hero-inner p {
+      font-size: 16px; color: rgba(255,255,255,0.6);
+      line-height: 1.7; max-width: 560px;
+    }
+
+    /* ── FILTER TABS ── */
+    .filter-bar {
+      background: var(--white);
+      border-bottom: 1px solid var(--light-gray);
+      position: sticky; top: 72px; z-index: 50;
+    }
+    .filter-inner {
+      max-width: 1100px; margin: 0 auto;
+      padding: 0 48px;
+      display: flex; gap: 0; overflow-x: auto;
+    }
+    .filter-btn {
+      padding: 18px 24px; font-size: 14px; font-weight: 600;
+      color: var(--gray); background: none; border: none;
+      border-bottom: 3px solid transparent;
+      cursor: pointer; white-space: nowrap;
+      transition: color 0.2s, border-color 0.2s;
+      font-family: var(--font-body);
+    }
+    .filter-btn:hover { color: var(--navy); }
+    .filter-btn.active { color: var(--navy); border-bottom-color: var(--gold); }
+
+    /* ── MAIN CONTENT ── */
+    .page-main {
+      max-width: 1100px; margin: 0 auto;
+      padding: 56px 48px 80px;
+    }
+
+    /* ── FACILITY SECTION ── */
+    .facility-section { margin-bottom: 72px; }
+    .facility-section:last-child { margin-bottom: 0; }
+
+    .facility-header {
+      display: flex; align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 28px; gap: 24px;
+    }
+    .facility-header-left {}
+    .facility-tag {
+      font-size: 11px; font-weight: 600; letter-spacing: 3px;
+      text-transform: uppercase; color: var(--gold);
+      display: block; margin-bottom: 8px;
+    }
+    .facility-title {
+      font-family: var(--font-display);
+      font-size: clamp(22px, 3vw, 32px);
+      font-weight: 700; color: var(--navy);
+      line-height: 1.2;
+    }
+    .facility-desc {
+      font-size: 14px; color: var(--gray);
+      line-height: 1.7; max-width: 480px;
+      text-align: right;
+    }
+    .gold-bar {
+      width: 48px; height: 3px;
+      background: var(--gold); border-radius: 2px;
+      margin-top: 10px;
+    }
+
+    /* ── GALLERY GRID ── */
+    /* Featured: 1 besar kiri + 2 kecil kanan */
+    .gallery-featured {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      grid-template-rows: 280px 280px;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    .gallery-featured .g-main {
+      grid-row: 1 / 3;
+    }
+
+    /* Grid biasa 3 kolom */
+    .gallery-grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    /* Grid 2 kolom */
+    .gallery-grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    /* Grid 4 kolom */
+    .gallery-grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+
+    /* ── GALLERY ITEM ── */
+    .g-item {
+      position: relative; overflow: hidden;
+      border-radius: 10px; cursor: pointer;
+      background: var(--navy);
+    }
+    .g-item img {
+      width: 100%; height: 100%;
+      object-fit: cover; display: block;
+      transition: transform 0.5s ease, opacity 0.3s;
+    }
+    .g-item:hover img { transform: scale(1.06); opacity: 0.85; }
+    .g-item-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(13,34,64,0.7) 0%, transparent 60%);
+      opacity: 0; transition: opacity 0.3s;
+      display: flex; align-items: flex-end; padding: 20px;
+    }
+    .g-item:hover .g-item-overlay { opacity: 1; }
+    .g-item-label {
+      font-size: 14px; font-weight: 600;
+      color: var(--white); line-height: 1.4;
+    }
+    .g-item-label span {
+      display: block; font-size: 11px;
+      color: var(--gold); font-weight: 400;
+      letter-spacing: 1px; margin-bottom: 4px;
+      text-transform: uppercase;
+    }
+
+    /* Fixed heights per layout */
+    .gallery-grid-3 .g-item { height: 240px; }
+    .gallery-grid-2 .g-item { height: 320px; }
+    .gallery-grid-4 .g-item { height: 200px; }
+
+    /* ── LIGHTBOX ── */
+    .lightbox {
+      display: none; position: fixed; inset: 0; z-index: 300;
+      background: rgba(5,15,35,0.95);
+      align-items: center; justify-content: center;
+      backdrop-filter: blur(8px);
+    }
+    .lightbox.open { display: flex; }
+    .lightbox-inner {
+      position: relative; max-width: 900px; width: 90%;
+      animation: lbIn 0.3s ease;
+    }
+    @keyframes lbIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to   { opacity: 1; transform: scale(1); }
+    }
+    .lightbox-inner img {
+      width: 100%; border-radius: 12px;
+      max-height: 80vh; object-fit: contain; display: block;
+    }
+    .lightbox-caption {
+      text-align: center; margin-top: 16px;
+      color: rgba(255,255,255,0.7); font-size: 14px;
+    }
+    .lightbox-caption strong { color: var(--gold); }
+    .lightbox-close {
+      position: absolute; top: -16px; right: -16px;
+      width: 40px; height: 40px; border-radius: 50%;
+      background: var(--gold); border: none; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px; color: var(--navy); font-weight: 700;
+      transition: transform 0.2s;
+    }
+    .lightbox-close:hover { transform: rotate(90deg); }
+    .lightbox-nav {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      background: rgba(255,255,255,0.1); border: none;
+      color: var(--white); width: 44px; height: 44px;
+      border-radius: 50%; cursor: pointer; font-size: 20px;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s;
+    }
+    .lightbox-nav:hover { background: var(--gold); color: var(--navy); }
+    .lightbox-prev { left: -60px; }
+    .lightbox-next { right: -60px; }
+
+    /* ── DIVIDER ── */
+    .section-divider {
+      border: none; border-top: 1px solid var(--light-gray);
+      margin-bottom: 72px;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #08192e; padding: 28px 48px; text-align: center;
+    }
+    .footer-bottom { font-size: 13px; color: rgba(255,255,255,0.3); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      nav { padding: 0 24px; }
+      .page-hero-inner { padding: 40px 24px 40px; }
+      .filter-inner { padding: 0 24px; }
+      .page-main { padding: 40px 24px 60px; }
+      .gallery-featured { grid-template-columns: 1fr; grid-template-rows: 260px 200px 200px; }
+      .gallery-featured .g-main { grid-row: 1; }
+      .gallery-grid-3 { grid-template-columns: 1fr 1fr; }
+      .gallery-grid-4 { grid-template-columns: 1fr 1fr; }
+      .facility-header { flex-direction: column; align-items: flex-start; }
+      .facility-desc { text-align: left; }
+      .lightbox-prev { left: -10px; }
+      .lightbox-next { right: -10px; }
+      footer { padding: 24px; }
+    }
+    @media (max-width: 560px) {
+      .gallery-grid-3, .gallery-grid-4 { grid-template-columns: 1fr; }
+      .gallery-grid-2 { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav>
+    <a href="index.html" class="nav-logo">
+      <img src="https://i.ibb.co.com/1fMy5VXb/logo-Pah-Tsung-text-biru-utk-video.png" alt="Logo Pah Tsung"/>
+    </a>
+    <a href="index.html" class="nav-back">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+        <path d="M19 12H5M12 5l-7 7 7 7"/>
+      </svg>
+      Kembali ke Beranda
+    </a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="page-hero">
+    <div class="page-hero-pattern"></div>
+    <div class="page-hero-inner">
+      <span class="page-eyebrow">Kompleks City Park · Cengkareng · Jakarta Barat</span>
+      <h1>Fasilitas <span>Lengkap</span> untuk<br>Tumbuh Kembang Optimal</h1>
+      <p>Pah Tsung School menghadirkan lingkungan belajar yang modern, nyaman, dan kondusif — dirancang untuk mendukung perkembangan akademik, karakter, dan kreativitas setiap siswa.</p>
+    </div>
+  </section>
+
+  <!-- FILTER TABS -->
+  <div class="filter-bar">
+    <div class="filter-inner">
+      <button class="filter-btn active" onclick="filterSection('all', this)">Semua</button>
+      <button class="filter-btn" onclick="filterSection('gedung', this)">Gedung Sekolah</button>
+      <button class="filter-btn" onclick="filterSection('waterplay', this)">Water Play & Playground</button>
+      <button class="filter-btn" onclick="filterSection('sport', this)">Sport Field</button>
+      <button class="filter-btn" onclick="filterSection('lainnya', this)">Fasilitas Lainnya</button>
+    </div>
+  </div>
+
+  <!-- MAIN -->
+  <div class="page-main">
+
+    <!-- GEDUNG SEKOLAH -->
+    <div class="facility-section" data-category="gedung" id="gedung">
+      <div class="facility-header">
+        <div class="facility-header-left">
+          <span class="facility-tag">Fasilitas Utama</span>
+          <h2 class="facility-title">Gedung Sekolah</h2>
+          <div class="gold-bar"></div>
+        </div>
+        <p class="facility-desc">Gedung sekolah Pah Tsung dirancang untuk menciptakan suasana belajar yang nyaman, modern, dan inspiratif bagi seluruh sivitas akademika.</p>
+      </div>
+      <!-- Featured layout: 1 besar + 2 kecil -->
+      <div class="gallery-featured">
+        <div class="g-item g-main" onclick="openLightbox(this, 'Gedung Sekolah', 'Aerial View')" style="height:100%">
+          <img src="https://i.ibb.co.com/rGyBYwjS/IMG-2774-JPG.jpg" alt="Gedung Sekolah"/>
+          <div class="g-item-overlay">
+            <div class="g-item-label"><span>Gedung Sekolah</span>Aerial View</div>
+          </div>
+        </div>
+        <div class="g-item" onclick="openLightbox(this, 'Gedung Sekolah', 'Area Dalam')">
+          <img src="https://i.ibb.co.com/ycSMJCs0/IMG-2779-JPG.jpg" alt="Area Dalam"/>
+          <div class="g-item-overlay">
+            <div class="g-item-label"><span>Gedung Sekolah</span>Tampak Depan</div>
+          </div>
+        </div>
+        <div class="g-item" onclick="openLightbox(this, 'Gedung Sekolah', 'Lingkungan Sekolah')">
+          <img src="https://i.ibb.co.com/CKy44q5b/Gedung-Sekolah-Pah-Tsung-Drone-resize.jpg" alt="Drone View"/>
+          <div class="g-item-overlay">
+            <div class="g-item-label"><span>Gedung Sekolah</span>Aerial View</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="section-divider"/>
+
+    <!-- WATER PLAY -->
+    <div class="facility-section" data-category="waterplay" id="waterplay">
+      <div class="facility-header">
+        <div class="facility-header-left">
+          <span class="facility-tag">Fasilitas Rekreasi</span>
+          <h2 class="facility-title">Water Play & Playground</h2>
+          <div class="gold-bar"></div>
+        </div>
+        <p class="facility-desc">Area bermain yang dirancang khusus untuk siswa TK dan SD — menyenangkan, aman, dan mendukung perkembangan motorik anak.</p>
+      </div>
+      <div class="gallery-grid-3">
+        <div class="g-item" onclick="openLightbox(this, 'Water Play', 'Area Bermain Air')">
+          <img src="https://i.ibb.co.com/jv9GKYKn/DSCF9704-1.jpg" alt="Water Play"/>
+          <div class="g-item-overlay">
+            <div class="g-item-label"><span>Water Play</span>Area Bermain Air</div>
+          </div>
+        </div>
+        <div class="g-item" onclick="openLightbox(this, 'Water Play', 'Aktivitas Siswa')">
+          <img src="https://i.ibb.co.com/svpkcPsj/Gemini-Generated-Image-p0n1yzp0n1yzp0n1.png" alt="Aktivitas TK"/>
+          <div class="g-item-overlay">
+            <div class="g-item-label"><span>Playground</span>Playground Luar</div>
+          </div>
+        </div>
+        <div class="g-item" onclick="openLightbox(this, 'Water Play', 'Fasilitas Lengkap')">
+          <img src="https://i.ibb.co.com/Ldt5FVmc/playground-luar.jpg" alt="Fasilitas"/>
+          <div class="g-item-overlay">
+            <div class="g-item-label"><span>Playground</span>Playground Luar</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="section-divider"/>
+
+    <!-- SPORT FIELD -->
+    <div class="facility-section" data-category="sport" id="sport">
+      <div class="facility-header">
+        <div class="facility-header-left">
+          <span class="facility-tag">Fasilitas Olahraga</span>
+          <h2 class="facility-title">Semi Indoor Sport Field</h2>
+          <div class="gold-bar"></div>
+        </div>
+        <p class="facility-desc">Lapangan olahraga semi indoor yang luas dan modern, mendukung berbagai kegiatan ekstrakurikuler dan olahraga siswa dari semua jenjang.</p>
+      </div>
+      <!-- 2 kolom untuk foto landscape -->
+      <div class="gallery-grid-2">
+        <div class="g-item" onclick="openLightbox(this, 'Semi Indoor Sport Field', 'Tampak Atas')">
+          <img src="https://i.ibb.co.com/99FSjN1J/DJI-0127-1.jpg" alt="Sport Field Drone"/>
+          <div class="g-item-overlay">
+            <div class="g-item-label"><span>Sport Field</span>Tampak Atas (Drone)</div>
+          </div>
+        </div>
+        <div class="g-item" onclick="openLightbox(this, 'Semi Indoor Sport Field', 'Aktivitas Olahraga')">
+          <img src="https://i.ibb.co.com/JwrMfMnX/semi-indoor-field.jpg" alt="Semi Indoor Sport Field"/>
+          <div class="g-item-overlay">
+            <div class="g-item-label"><span>Sport Field</span>Semi Indoor Sport Field</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="section-divider"/>
+
+    <!-- FASILITAS LAINNYA -->
+    <div class="facility-section" data-category="lainnya" id="lainnya">
+      <div class="facility-header">
+        <div class="facility-header-left">
+          <span class="facility-tag">Pendukung Akademik</span>
+          <h2 class="facility-title">Fasilitas Lainnya</h2>
+          <div class="gold-bar"></div>
+        </div>
+        <p class="facility-desc">Berbagai fasilitas pendukung yang melengkapi pengalaman belajar siswa di Pah Tsung School.</p>
+      </div>
+      <div class="gallery-grid-4">
+        <div class="g-item" onclick="openLightbox(this, 'Fasilitas', 'Ruang Kelas')">
+          <img src="https://i.ibb.co.com/0yXN0vDB/DSC-3494.jpg" alt="Ruang Kelas"/>
+          <div class="g-item-overlay">
+            <div class="g-item-label"><span>Akademik</span>Ruang Kelas</div>
+          </div>
+        </div>
+        <div class="g-item" onclick="openLightbox(this, 'Fasilitas', 'Kegiatan Siswa')">
+          <img src="https://i.ibb.co.com/C3DWH8dr/L1370753.jpg" alt="Kegiatan"/>
+          <div class="g-item-overlay">
+            <div class="g-item-label"><span>Akademik</span>Kegiatan Siswa</div>
+          </div>
+        </div>
+        <div class="g-item" onclick="openLightbox(this, 'Fasilitas', 'Ekstrakurikuler')">
+          <img src="https://i.ibb.co.com/q3zrP7GW/DSCF5296.jpg" alt="Ekskul"/>
+          <div class="g-item-overlay">
+            <div class="g-item-label"><span>Akademik</span>Ekstrakurikuler</div>
+          </div>
+        </div>
+        <div class="g-item" onclick="openLightbox(this, 'Fasilitas', 'Lingkungan Sekolah')">
+          <img src="https://i.ibb.co.com/fz1f8ygx/TK-banner-web.jpg" alt="Lingkungan"/>
+          <div class="g-item-overlay">
+            <div class="g-item-label"><span>Lingkungan</span>Suasana Sekolah</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox" id="lightbox" onclick="closeLightboxOutside(event)">
+    <div class="lightbox-inner">
+      <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+      <button class="lightbox-nav lightbox-prev" onclick="navLightbox(-1)">&#8249;</button>
+      <button class="lightbox-nav lightbox-next" onclick="navLightbox(1)">&#8250;</button>
+      <img id="lightbox-img" src="" alt=""/>
+      <div class="lightbox-caption">
+        <strong id="lightbox-title"></strong>
+        <span id="lightbox-sub"></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-bottom">© 2025 Pah Tsung School. Hak cipta dilindungi. &nbsp;·&nbsp; Kompleks City Park Blok A4, Cengkareng, Jakarta Barat</div>
+  </footer>
+
+  <script>
+    // ── FILTER ──
+    function filterSection(cat, btn) {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      document.querySelectorAll('.facility-section').forEach(sec => {
+        if (cat === 'all' || sec.dataset.category === cat) {
+          sec.style.display = '';
+        } else {
+          sec.style.display = 'none';
+        }
+      });
+      document.querySelectorAll('.section-divider').forEach(d => {
+        d.style.display = cat === 'all' ? '' : 'none';
+      });
+    }
+
+    // ── LIGHTBOX ──
+    let allImages = [];
+    let currentIdx = 0;
+
+    function buildImageList() {
+      allImages = [];
+      document.querySelectorAll('.g-item').forEach(item => {
+        const img = item.querySelector('img');
+        const label = item.querySelector('.g-item-label');
+        const tag = label ? label.querySelector('span') : null;
+        allImages.push({
+          src: img.src,
+          title: tag ? tag.textContent : '',
+          sub: label ? label.childNodes[label.childNodes.length - 1].textContent.trim() : ''
+        });
+      });
+    }
+
+    function openLightbox(el, title, sub) {
+      buildImageList();
+      const img = el.querySelector('img');
+      currentIdx = allImages.findIndex(i => i.src === img.src);
+      showLightboxImage(currentIdx);
+      document.getElementById('lightbox').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function showLightboxImage(idx) {
+      if (idx < 0) idx = allImages.length - 1;
+      if (idx >= allImages.length) idx = 0;
+      currentIdx = idx;
+      const data = allImages[idx];
+      document.getElementById('lightbox-img').src = data.src;
+      document.getElementById('lightbox-title').textContent = data.title ? data.title + ' · ' : '';
+      document.getElementById('lightbox-sub').textContent = data.sub;
+    }
+
+    function navLightbox(dir) {
+      showLightboxImage(currentIdx + dir);
+    }
+
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    function closeLightboxOutside(e) {
+      if (e.target === document.getElementById('lightbox')) closeLightbox();
+    }
+
+    // Keyboard navigation
+    document.addEventListener('keydown', e => {
+      if (!document.getElementById('lightbox').classList.contains('open')) return;
+      if (e.key === 'ArrowLeft') navLightbox(-1);
+      if (e.key === 'ArrowRight') navLightbox(1);
+      if (e.key === 'Escape') closeLightbox();
+    });
+
+    // Fade in on scroll
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.style.opacity = '1';
+          e.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.facility-section').forEach(s => {
+      s.style.opacity = '0';
+      s.style.transform = 'translateY(24px)';
+      s.style.transition = 'opacity 0.7s ease, transform 0.7s ease';
+      observer.observe(s);
+    });
+  </script>
+
+</body>
+</html>
