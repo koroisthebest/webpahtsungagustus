@@ -865,6 +865,70 @@
     }
 
 
+    /* ── DIRECTOR'S NOTE ── */
+    .director-note-grid {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 56px;
+      align-items: center;
+    }
+    .director-note-photo-wrap {
+      position: relative;
+    }
+    .director-note-photo {
+      width: 100%;
+      aspect-ratio: 466 / 608;
+      object-fit: cover;
+      border-radius: 8px;
+      display: block;
+      position: relative;
+      z-index: 2;
+      box-shadow: 0 18px 40px rgba(13,34,64,0.18);
+    }
+    .director-note-frame {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      width: 100%;
+      height: 100%;
+      border: 2px solid var(--gold);
+      border-radius: 8px;
+      z-index: 1;
+    }
+    .director-note-quote {
+      font-size: clamp(16px, 2vw, 19px);
+      line-height: 1.75;
+      color: var(--navy);
+      font-style: italic;
+      margin: 0 0 28px;
+      padding-left: 20px;
+      border-left: 3px solid var(--gold);
+    }
+    .director-note-signature {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .director-note-name {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--navy);
+    }
+    .director-note-role {
+      font-size: 14px;
+      color: var(--gray);
+    }
+    @media (max-width: 768px) {
+      .director-note-grid {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+      .director-note-photo-wrap {
+        width: 200px;
+        margin: 0 auto;
+      }
+    }
+
     /* ── TESTIMONI ── */
     .testimoni { background: var(--off-white); }
 
@@ -1568,6 +1632,30 @@
           <div class="about-image-badge">
             <span class="badge-number">三语</span>
             <div class="badge-text" data-i18n-html="about_badge_text">Trilingual<br>School</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DIRECTOR'S NOTE -->
+  <section class="section director-note" id="director-note">
+    <div class="section-inner">
+      <div class="director-note-grid">
+        <div class="director-note-photo-wrap">
+          <img src="assets/img/anhar-anugerah.jpg" alt="Anhar Anugerah, M.M. - Direktur Pah Tsung School" class="director-note-photo"/>
+          <div class="director-note-frame"></div>
+        </div>
+        <div>
+          <span class="section-eyebrow" data-i18n="director_eyebrow">Sambutan Direktur</span>
+          <div class="gold-divider"></div>
+          <h2 class="section-title" data-i18n="director_title">Catatan dari Direktur</h2>
+          <p class="director-note-quote" data-i18n="director_quote">
+            “Pendidikan yang baik bukan hanya tentang menguasai tiga bahasa, tetapi tentang membentuk karakter yang siap menghadapi dunia. Di Pah Tsung School, kami percaya setiap anak memiliki potensi untuk optimis, progresif, kooperatif, dan berdedikasi — nilai-nilai yang akan menuntun mereka jauh melampaui bangku sekolah.”
+          </p>
+          <div class="director-note-signature">
+            <span class="director-note-name">Anhar Anugerah, M.M.</span>
+            <span class="director-note-role" data-i18n="director_role">Direktur, Pah Tsung School</span>
           </div>
         </div>
       </div>
@@ -2450,6 +2538,10 @@
         about_body2: 'Dengan Kurikulum Merdeka yang progresif dan didukung oleh guru-guru berpengalaman termasuk native speaker, Pah Tsung School membekali siswa dengan kemampuan bahasa Mandarin yang kuat sekaligus membangun karakter yang disiplin, toleran, dan siap bersaing di dunia internasional.',
         about_link: 'Pelajari Lebih Lanjut tentang Pah Tsung',
         about_badge_text: 'Trilingual<br>School',
+        director_eyebrow: 'Sambutan Direktur',
+        director_title: 'Catatan dari Direktur',
+        director_quote: '“Pendidikan yang baik bukan hanya tentang menguasai tiga bahasa, tetapi tentang membentuk karakter yang siap menghadapi dunia. Di Pah Tsung School, kami percaya setiap anak memiliki potensi untuk optimis, progresif, kooperatif, dan berdedikasi — nilai-nilai yang akan menuntun mereka jauh melampaui bangku sekolah.”',
+        director_role: 'Direktur, Pah Tsung School',
         jenjang_eyebrow: 'Jenjang Pendidikan',
         jenjang_title: 'Satu Atap untuk Semua Jenjang',
         jenjang_intro: 'Dari usia dini hingga SMA, Pah Tsung School mendampingi tumbuh kembang anak Anda dengan pendidikan trilingual yang terintegrasi.',
@@ -2549,6 +2641,10 @@
         about_body2: 'With a progressive Merdeka Curriculum and experienced teachers, including native speakers, Pah Tsung School equips students with strong Mandarin proficiency while building discipline, tolerance, and readiness to compete on the international stage.',
         about_link: 'Learn More About Pah Tsung',
         about_badge_text: 'Trilingual<br>School',
+        director_eyebrow: "Director's Note",
+        director_title: "A Note from Our Director",
+        director_quote: '"A good education is not only about mastering three languages, but about shaping character ready to face the world. At Pah Tsung School, we believe every child has the potential to be optimistic, progressive, cooperative, and dedicated — values that will guide them far beyond the classroom."',
+        director_role: 'Director, Pah Tsung School',
         jenjang_eyebrow: 'Education Levels',
         jenjang_title: 'One Campus for Every Level',
         jenjang_intro: 'From early childhood through high school, Pah Tsung School accompanies your child\'s growth with an integrated trilingual education.',
@@ -2648,6 +2744,10 @@
         about_body2: '凭借进步的Merdeka课程体系，以及包括母语教师在内的资深师资团队，八中华学校为学生打下扎实的华语基础，同时培养纪律性、包容心，做好在国际舞台上竞争的准备。',
         about_link: '了解更多八中华学校信息',
         about_badge_text: '三语<br>学校',
+        director_eyebrow: '校长致辞',
+        director_title: '校长寄语',
+        director_quote: '“良好的教育不仅是掌握三种语言，更是塑造能够从容面对世界的品格。在八中华学校，我们相信每个孩子都拥有乐观、进取、合作、奉献的潜质——这些价值观将指引他们走得更远，超越校园。”',
+        director_role: '八中华学校 校长',
         jenjang_eyebrow: '教育阶段',
         jenjang_title: '一个校区，涵盖所有阶段',
         jenjang_intro: '从幼儿阶段到高中，八中华学校以整合式三语教育陪伴孩子成长的每一步。',
