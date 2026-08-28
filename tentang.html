@@ -180,9 +180,33 @@
       display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
     }
     .sejarah-img-wrap { position: relative; }
-    .sejarah-img-wrap img {
-      width: 100%; height: 420px; object-fit: cover;
-      border-radius: 14px; display: block;
+    .sejarah-photo-grid {
+      display: grid;
+      grid-template-columns: 1.25fr 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 10px;
+      height: 440px;
+    }
+    .sejarah-photo-grid img {
+      width: 100%; height: 100%; object-fit: cover;
+      border-radius: 12px; display: block;
+      transition: transform 0.4s ease;
+    }
+    .sejarah-photo-grid a { display: block; overflow: hidden; border-radius: 12px; }
+    .sejarah-photo-grid a:hover img { transform: scale(1.06); }
+    .sejarah-photo-main { grid-column: 1; grid-row: 1 / 3; }
+    .sejarah-photo-2 { grid-column: 2; grid-row: 1; }
+    .sejarah-photo-3 { grid-column: 3; grid-row: 1; }
+    .sejarah-photo-4 { grid-column: 2 / 4; grid-row: 2; }
+    @media (max-width: 640px) {
+      .sejarah-photo-grid {
+        grid-template-columns: 1fr 1fr; grid-template-rows: 180px 110px 110px;
+        height: auto;
+      }
+      .sejarah-photo-main { grid-column: 1 / 3; grid-row: 1; }
+      .sejarah-photo-2 { grid-column: 1; grid-row: 2; }
+      .sejarah-photo-3 { grid-column: 2; grid-row: 2; }
+      .sejarah-photo-4 { grid-column: 1 / 3; grid-row: 3; }
     }
     .sejarah-badge {
       position: absolute; bottom: -20px; left: -20px;
@@ -292,14 +316,6 @@
     }
     .nilai-card h4 { font-size: 16px; font-weight: 700; color: var(--navy); margin-bottom: 6px; }
     .nilai-card p { font-size: 13px; color: var(--gray); line-height: 1.6; }
-
-    /* ── FOTO GALLERY ── */
-    .gallery-section { background: var(--white); }
-    .gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: 220px 220px; gap: 16px; margin-top: 48px; }
-    .gallery-item { border-radius: 12px; overflow: hidden; position: relative; }
-    .gallery-item.big { grid-column: 1; grid-row: 1 / 3; }
-    .gallery-item img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.5s; }
-    .gallery-item:hover img { transform: scale(1.06); }
 
     /* ── CTA ── */
     .cta-section {
@@ -466,7 +482,12 @@
           </p>
         </div>
         <div class="sejarah-img-wrap">
-          <img src="https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=800&auto=format&fit=crop" alt="Gedung Sekolah Pah Tsung"/>
+          <div class="sejarah-photo-grid">
+            <img class="sejarah-photo-main" src="https://i.ibb.co.com/BHBKWBDK/ruang-kelas-lama.jpg" alt="Ruang Kelas Lama Pah Tsung School"/>
+            <img class="sejarah-photo-2" src="https://i.ibb.co.com/60H1B2Kz/foto-pah-tsung-old.jpg" alt="Foto Kenangan Pah Tsung School 1"/>
+            <img class="sejarah-photo-3" src="https://i.ibb.co.com/4RZpwP5S/foto-pah-tsung-old-2.jpg" alt="Foto Kenangan Pah Tsung School 2"/>
+            <img class="sejarah-photo-4" src="https://i.ibb.co.com/jK2tqzp/foto-pah-tsung-old-3.jpg" alt="Foto Kenangan Pah Tsung School 3"/>
+          </div>
           <div class="sejarah-badge">
             <span class="badge-num">30<span style="font-size:16px">+</span></span>
             <div class="badge-text" data-i18n-html="sejarah_badge">Tahun<br/>Berdiri</div>
@@ -679,32 +700,6 @@
     </div>
   </section>
 
-  <!-- FOTO GALLERY -->
-  <section class="section gallery-section">
-    <div class="section-inner">
-      <span class="section-eyebrow" data-i18n="gallery_eyebrow">Sekilas Pah Tsung</span>
-      <div class="gold-divider"></div>
-      <h2 class="section-title" data-i18n="gallery_title">Kehidupan di Pah Tsung School</h2>
-      <div class="gallery-grid">
-        <div class="gallery-item big fade-in">
-          <img src="https://i.ibb.co.com/rGyBYwjS/IMG-2774-JPG.jpg" alt="Gedung Sekolah"/>
-        </div>
-        <div class="gallery-item fade-in">
-          <img src="https://i.ibb.co.com/m5D3vXY5/foto-aset-web-siswa-pah-tsung.png" alt="Siswa Pah Tsung"/>
-        </div>
-        <div class="gallery-item fade-in">
-          <img src="https://i.ibb.co.com/fz1f8ygx/TK-banner-web.jpg" alt="TK Pah Tsung"/>
-        </div>
-        <div class="gallery-item fade-in">
-          <img src="https://i.ibb.co.com/0yXN0vDB/DSC-3494.jpg" alt="SD Pah Tsung"/>
-        </div>
-        <div class="gallery-item fade-in">
-          <img src="https://i.ibb.co.com/99FSjN1J/DJI-0127-1.jpg" alt="Sport Field"/>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- CTA -->
   <section class="cta-section">
     <h2>Bergabunglah Bersama<br/><span>Pah Tsung School</span></h2>
@@ -813,8 +808,6 @@
         nilai_5_p: "Empat jenjang pendidikan dalam satu kompleks memudahkan orang tua dan menciptakan komunitas sekolah yang solid.",
         nilai_6_h: "Sertifikasi Internasional",
         nilai_6_p: "Mitra resmi Pearson Edexcel, pusat ujian HSK dan YCT — sertifikasi yang diakui oleh universitas di seluruh dunia.",
-        gallery_eyebrow: "Sekilas Pah Tsung",
-        gallery_title: "Kehidupan di Pah Tsung School",
         footer_copyright: "© 2025 Pah Tsung School. Kompleks City Park Blok A4, Cengkareng, Jakarta Barat"
       },
       en: {
@@ -888,8 +881,6 @@
         nilai_5_p: "Four levels of education in one complex makes things easier for parents and builds a solid school community.",
         nilai_6_h: "International Certification",
         nilai_6_p: "Official Pearson Edexcel partner, HSK and YCT exam center — certifications recognized by universities worldwide.",
-        gallery_eyebrow: "A Glimpse of Pah Tsung",
-        gallery_title: "Life at Pah Tsung School",
         footer_copyright: "© 2025 Pah Tsung School. City Park Complex Block A4, Cengkareng, West Jakarta"
       },
       zh: {
@@ -963,8 +954,6 @@
         nilai_5_p: "四个教育层次同处一个校区，方便家长管理，也营造出紧密的学校社群。",
         nilai_6_h: "国际认证",
         nilai_6_p: "Pearson Edexcel官方合作伙伴，HSK与YCT考点——获全球大学认可的资格认证。",
-        gallery_eyebrow: "八中华掠影",
-        gallery_title: "八中华学校的校园生活",
         footer_copyright: "© 2025 八中华学校. City Park社区A4街区，千卡冷，西雅加达"
       }
     };
